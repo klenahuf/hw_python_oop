@@ -172,4 +172,3 @@ if __name__ == 'main':
     for workout_type, data in packages:
         training = read_package(workout_type, data)
         main(training)
-
