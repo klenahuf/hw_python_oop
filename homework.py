@@ -17,7 +17,7 @@ class InfoMessage:
         self.distance = distance
         self.speed = speed
         self.calories = calories
-
+        
     def get_message(self) -> str:
         """метод для вывода сообщений"""
 
@@ -73,7 +73,6 @@ class Training:
 class Running(Training):
     """Тренировка: бег."""
 
-    MIN_IN_H = 60
     KMH_IN_MSEC = 0.278
     CALORIES_MEAN_SPEED_MULTIPLIER = 18
     CALORIES_MEAN_SPEED_SHIFT = 1.79
@@ -81,10 +80,8 @@ class Running(Training):
     def get_spent_calories(self) -> float:
         """Получить кол-во затраченных калорий."""
 
-        calories_mean_speed_multiplier = 18
-        calories_mean_speed_shift = 1.79
-        return ((calories_mean_speed_multiplier * self.get_mean_speed()
-                + calories_mean_speed_shift) * self.weight
+        return ((self.CALORIES_MEAN_SPEED_MULTIPLIER * self.get_mean_speed()
+                + self.CALORIES_MEAN_SPEED_SHIFT) * self.weight
                 / self.M_IN_KM * self.duration * self.MIN_IN_H)
 
 
@@ -94,7 +91,7 @@ class SportsWalking(Training):
     MIN_IN_H = 60
     KMH_IN_MSEC = 0.278
     CM_IN_M = 100
-    CALORIES_WEIGHT_MULTIPLIER = 0.035
+    CALORIES_WEIGHT_MULTIPLIER = 0.035 
     CALORIES_SPEED_HEIGHT_MULTIPLIER = 0.029
 
     def __init__(
@@ -141,12 +138,9 @@ class Swimming(Training):
         return ((self.get_mean_speed() + self.CALORIES_MEAN_SPEED_SHIFT)
                 * self.CALORIES_WEIGHT_MULTIPLIER * self.weight
                 * self.duration)
+ 
 
-    def get_distance(self) -> float:
-        return self.action * self.LEN_STEP / self.M_IN_KM
-
-
-def read_package(workout_type: str, data: List) -> Training:
+def read_package(workout_type: str, data: List[int]) -> Training:
     """Прочитать данные полученные от датчиков."""
 
     training_types: Dict[str, Type[Training]] = {
