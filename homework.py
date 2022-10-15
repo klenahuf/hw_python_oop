@@ -17,7 +17,7 @@ class InfoMessage:
         self.distance = distance
         self.speed = speed
         self.calories = calories
-        
+
     def get_message(self) -> str:
         """метод для вывода сообщений"""
 
@@ -91,7 +91,7 @@ class SportsWalking(Training):
     MIN_IN_H = 60
     KMH_IN_MSEC = 0.278
     CM_IN_M = 100
-    CALORIES_WEIGHT_MULTIPLIER = 0.035 
+    CALORIES_WEIGHT_MULTIPLIER = 0.035
     CALORIES_SPEED_HEIGHT_MULTIPLIER = 0.029
 
     def __init__(
@@ -138,7 +138,7 @@ class Swimming(Training):
         return ((self.get_mean_speed() + self.CALORIES_MEAN_SPEED_SHIFT)
                 * self.CALORIES_WEIGHT_MULTIPLIER * self.weight
                 * self.duration)
- 
+
 
 def read_package(workout_type: str, data: List[int]) -> Training:
     """Прочитать данные полученные от датчиков."""
